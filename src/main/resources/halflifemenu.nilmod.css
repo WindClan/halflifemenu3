@@ -1,0 +1,10 @@
+@nilmod {
+	name: "Half-Life Menu";
+	description: "This mod makes some Minecraft menus look like they are from Half Life (v1.1.1.1)";
+	authors: "WindClan";
+	version: "${version}";
+}
+
+entrypoints {
+	premain: "windclan.halflifemenu.main";
+}
