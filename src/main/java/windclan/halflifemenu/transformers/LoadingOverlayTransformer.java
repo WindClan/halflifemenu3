@@ -21,12 +21,13 @@ public class LoadingOverlayTransformer extends MiniTransformer {
         );
     }
     @Patch.Method("render(Lnet/minecraft/client/gui/GuiGraphics;IIF)V")
+    @Patch.Method.AffectsControlFlow
     public void patchRender(PatchContext ctx) {
         ctx.jumpToLastReturn();
         ctx.add(
                 ALOAD(0),
                 ALOAD(1),
-                INVOKESTATIC("windclan/halflifemenu/transformers/LoadingOverlayTransformer$Hooks", "render", "(Lnet/minecraft/client/gui/GuiGraphics;)V")
+                INVOKESTATIC("windclan/halflifemenu/transformers/LoadingOverlayTransformer$Hooks", "render", "(Lnet/minecraft/client/gui/screens/LoadingOverlay;Lnet/minecraft/client/gui/GuiGraphics;)V")
         );
     }
     public static class Hooks {
