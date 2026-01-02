@@ -53,4 +53,5 @@ dependencies {
 
 mappings {
 	work nil.mojmap('1.21.1', 'client')
+	target 'net.fabricmc:intermediary:1.21.1:v2'
 }
