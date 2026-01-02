@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '1.14-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version '1.14-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -7,46 +7,40 @@ version = project.mod_version
 group = project.maven_group
 
 base {
-    archivesName = project.archives_base_name
+    archivesName = "${project.archives_base_name}-mc${project.minecraft_version}"
 }
 
 
 repositories {
-    maven {
-        name = 'ParchmentMC'
-        url = 'https://maven.parchmentmc.org'
-    }
+
 }
 
 dependencies {
     // To change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.21.11:2025.12.20@zip")
-    }
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 }
 
 processResources {
     inputs.property "version", project.version
     inputs.property "minecraft_version", project.minecraft_version
+    inputs.property "minecraft_ver", project.minecraft_ver
     inputs.property "loader_version", project.loader_version
     filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
-                "minecraft_version": project.minecraft_version,
+                "minecraft_ver": project.minecraft_ver,
                 "loader_version": project.loader_version
     }
     filesMatching("quilt.mod.json") {
         expand "version": project.version,
+                "minecraft_ver": project.minecraft_ver
+    }
+    filesMatching("META-INF/neoforge.mods.toml") {
+        expand "version": project.version,
                 "minecraft_version": project.minecraft_version
     }
-//    filesMatching("META-INF/neoforge.mods.toml") {
-//        expand "version": project.version,
-//                "minecraft_version": project.minecraft_version
-//    }
 }
 
 def targetJavaVersion = 21

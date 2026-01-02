@@ -10,13 +10,16 @@
       "contributors": {
         "Me!": "WindClan"
       },
+      "contact": {
+        "sources": "https://github.com/WindClan/halflifemenu3"
+      },
       "icon": "assets/halflifemenu/icon.png"
     },
     "intermediate_mappings": "net.fabricmc:intermediary",
     "depends": [
       {
         "id": "minecraft",
-        "version": "${minecraft_version}"
+        "version": "${minecraft_ver}"
       }
     ]
   },

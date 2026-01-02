@@ -5,7 +5,9 @@
   "name": "Half-Life Menu",
   "description": "This mod makes some Minecraft menus look like they are from Half Life (v1.1.1.1)",
   "authors": ["WindClan"],
-  "contact": {},
+  "contact": {
+    "sources": "https://github.com/WindClan/halflifemenu3"
+  },
   "license": "MIT",
   "icon": "assets/halflifemenu/icon.png",
   "environment": "client",
@@ -13,6 +15,6 @@
     "halflifemenu.mixins.json"
   ],
   "depends": {
-    "minecraft": "${minecraft_version}"
+    "minecraft": "${minecraft_ver}"
   }
 }
