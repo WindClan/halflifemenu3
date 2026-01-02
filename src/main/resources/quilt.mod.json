@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "windclan",
+    "id": "halflifemenu",
+    "version": "${version}",
+    "metadata": {
+      "name": "Half-Life Menu",
+      "description": "This mod makes some Minecraft menus look like they are from Half Life (v1.1.1.1)",
+      "contributors": {
+        "Me!": "WindClan"
+      },
+      "icon": "assets/halflifemenu/icon.png"
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "depends": [
+      {
+        "id": "minecraft",
+        "version": "${minecraft_version}"
+      }
+    ]
+  },
+  "mixin": [
+    "halflifemenu.mixins.json"
+  ]
+}

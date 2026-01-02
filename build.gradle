@@ -39,6 +39,14 @@ processResources {
                 "minecraft_version": project.minecraft_version,
                 "loader_version": project.loader_version
     }
+    filesMatching("quilt.mod.json") {
+        expand "version": project.version,
+                "minecraft_version": project.minecraft_version
+    }
+//    filesMatching("META-INF/neoforge.mods.toml") {
+//        expand "version": project.version,
+//                "minecraft_version": project.minecraft_version
+//    }
 }
 
 def targetJavaVersion = 21
