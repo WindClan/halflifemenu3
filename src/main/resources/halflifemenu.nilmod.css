@@ -7,4 +7,5 @@
 
 entrypoints {
 	premain: "windclan.halflifemenu.main";
+	hijack: "windclan.halflifemenu.main";
 }
