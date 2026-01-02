@@ -52,10 +52,10 @@ public class HalfLifeTitle extends Screen {
                     .bounds(13,  baseHeight - (buttonHeight+2)*6, buttonWidth, buttonHeight)
                     .build());
         }
-        this.addRenderableWidget(Button.builder(Component.literal("Options").withStyle(ChatFormatting.WHITE), button -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options)))
+        this.addRenderableWidget(Button.builder(Component.literal("Options...").withStyle(ChatFormatting.WHITE), button -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options)))
                 .bounds(13,  baseHeight - (buttonHeight+2)*4, buttonWidth, buttonHeight)
                 .build());
-        this.addRenderableWidget(Button.builder(Component.literal("Quit").withStyle(ChatFormatting.WHITE), button -> this.minecraft.stop())
+        this.addRenderableWidget(Button.builder(Component.literal("Quit Game").withStyle(ChatFormatting.WHITE), button -> this.minecraft.stop())
                 .bounds(13,  baseHeight - (buttonHeight+2)*3, buttonWidth, buttonHeight)
                 .build());
     }
