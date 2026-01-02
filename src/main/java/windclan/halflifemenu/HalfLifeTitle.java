@@ -66,4 +66,9 @@ public class HalfLifeTitle extends Screen {
         int baseHeight = this.height;
         context.blit(RenderPipelines.GUI_TEXTURED,logo,15,(int)(baseHeight-(buttonHeight+2)*1.5),0,0,219/2,buttonHeight/2,219/2,buttonHeight/2);
     }
+
+    @Override
+    public void renderBackground(GuiGraphics context, int mouseX, int mouseY, float delta) {
+        super.renderPanorama(context,delta);
+    }
 }
