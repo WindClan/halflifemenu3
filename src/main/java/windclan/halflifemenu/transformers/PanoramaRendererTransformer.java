@@ -4,12 +4,13 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.PanoramaRenderer;
 import net.minecraft.resources.ResourceLocation;
+import nilloader.api.ClassRetransformer;
 import nilloader.api.lib.mini.MiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 
 @Patch.Class("net.minecraft.client.renderer.PanoramaRenderer")
-public class PanoramaRendererTransformer extends MiniTransformer {
+public class PanoramaRendererTransformer extends MiniTransformer implements ClassRetransformer {
     @Patch.Method("render(Lnet/minecraft/client/gui/GuiGraphics;IIFF)V")
     public void patchRender(PatchContext ctx) {
         ctx.jumpToLastReturn();

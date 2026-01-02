@@ -5,13 +5,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.client.gui.GuiGraphics;
+import nilloader.api.ClassRetransformer;
 import nilloader.api.lib.mini.MiniTransformer;
 import nilloader.api.lib.mini.PatchContext;
 import nilloader.api.lib.mini.annotation.Patch;
 import windclan.halflifemenu.MenuTexture;
 
 @Patch.Class("net.minecraft.client.gui.screens.LoadingOverlay")
-public class LoadingOverlayTransformer extends MiniTransformer {
+public class LoadingOverlayTransformer extends MiniTransformer implements ClassRetransformer {
     @Patch.Method("registerTextures(Lnet/minecraft/client/Minecraft;)V")
     public void patchRegisterTextures(PatchContext ctx) {
         ctx.jumpToStart();
