@@ -4,8 +4,8 @@
   "package": "windclan.halflifemenu.mixin",
   "compatibilityLevel": "JAVA_25",
   "client": [
-    "RotatingCubeMapRendererMixin",
-    "SplashOverlayMixin",
+    "PanoramaRendererMixin",
+    "LoadingOverlayMixin",
     "TitleScreenMixin"
   ],
   "injectors": {

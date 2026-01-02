@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import windclan.halflifemenu.MenuTexture;
 
 @Mixin(PanoramaRenderer.class)
-public class RotatingCubeMapRendererMixin {
+public class PanoramaRendererMixin {
     @Unique
     private static Identifier bkg = Identifier.fromNamespaceAndPath("halflifemenu","textures/bkg.png");
     /**

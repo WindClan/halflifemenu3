@@ -19,7 +19,7 @@ import windclan.halflifemenu.MenuTexture;
 
 
 @Mixin(LoadingOverlay.class)
-public abstract class SplashOverlayMixin {
+public abstract class LoadingOverlayMixin {
     @Final
     @Shadow
     private Minecraft minecraft;
