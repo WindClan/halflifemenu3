@@ -7,6 +7,8 @@ import net.minecraft.client.renderer.texture.TextureContents;
 import net.minecraft.client.resources.metadata.texture.TextureMetadataSection;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 

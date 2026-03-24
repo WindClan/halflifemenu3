@@ -1,7 +1,7 @@
 package windclan.halflifemenu;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
@@ -52,7 +52,7 @@ public class HalfLifeTitle extends Screen {
                     .bounds(13,  baseHeight - (buttonHeight+2)*6, buttonWidth, buttonHeight)
                     .build());
         }
-        this.addRenderableWidget(Button.builder(Component.literal("Options...").withStyle(ChatFormatting.WHITE), button -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options)))
+        this.addRenderableWidget(Button.builder(Component.literal("Options...").withStyle(ChatFormatting.WHITE), button -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options,false)))
                 .bounds(13,  baseHeight - (buttonHeight+2)*4, buttonWidth, buttonHeight)
                 .build());
         this.addRenderableWidget(Button.builder(Component.literal("Quit Game").withStyle(ChatFormatting.WHITE), button -> this.minecraft.stop())
@@ -61,14 +61,14 @@ public class HalfLifeTitle extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
-        super.render(context,mouseX,mouseY,delta);
+    public void extractRenderState(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, final float a) {
+        super.extractRenderState(graphics,mouseX,mouseY,a);
         int baseHeight = this.height;
-        context.blit(RenderPipelines.GUI_TEXTURED,logo,15,(int)(baseHeight-(buttonHeight+2)*1.5),0,0,219/2,buttonHeight/2,219/2,buttonHeight/2);
+        graphics.blit(RenderPipelines.GUI_TEXTURED,logo,15,(int)(baseHeight-(buttonHeight+2)*1.5),0,0,219/2,buttonHeight/2,219/2,buttonHeight/2);
     }
 
     @Override
-    public void renderBackground(GuiGraphics context, int mouseX, int mouseY, float delta) {
-        super.renderPanorama(context,delta);
+    public void extractBackground(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, final float a) {
+        super.extractPanorama(graphics,a);
     }
 }

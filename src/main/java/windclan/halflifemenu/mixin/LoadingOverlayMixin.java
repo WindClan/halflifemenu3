@@ -1,7 +1,7 @@
 package windclan.halflifemenu.mixin;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -16,7 +16,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import windclan.halflifemenu.MenuTexture;
-
 
 @Mixin(LoadingOverlay.class)
 public abstract class LoadingOverlayMixin {
@@ -38,7 +37,7 @@ public abstract class LoadingOverlayMixin {
     @Unique
     private final static Identifier lambda = Identifier.fromNamespaceAndPath("halflifemenu","textures/loading/lambda.png");
     @Inject(method="registerTextures", at=@At("TAIL"))
-    private static void registerTextures(TextureManager textureManager, CallbackInfo ci) {
+    private static void registerTextures(final TextureManager textureManager, CallbackInfo ci) {
         textureManager.registerAndLoad(blank,new MenuTexture(blank));
         textureManager.registerAndLoad(gray,new MenuTexture(gray));
         textureManager.registerAndLoad(mrvalve,new MenuTexture(mrvalve));
@@ -46,17 +45,17 @@ public abstract class LoadingOverlayMixin {
         textureManager.registerAndLoad(lambda,new MenuTexture(lambda));
     }
 
-    @Inject(method="render", at=@At("TAIL"))
-    public void render(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+    @Inject(method="extractRenderState", at=@At("TAIL"))
+    public void extractRenderState(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, final float a, CallbackInfo ci) {
         int width = minecraft.getWindow().getGuiScaledWidth();
         int height = minecraft.getWindow().getGuiScaledHeight();
         float f = this.fadeOutStart > -1L ? (float)(Util.getEpochMillis() - this.fadeOutStart) / 1000.0F : -1.0F;
         if(this.fadeIn) {
-            context.blit(RenderPipelines.GUI_TEXTURED,gray,0,0,0,0,width,height,16,16);
-            context.blit(RenderPipelines.GUI_TEXTURED,lambda,(width/2)-64,(height/2)-64,0,0,128,128,128,128);
+            graphics.blit(RenderPipelines.GUI_TEXTURED,gray,0,0,0,0,width,height,16,16);
+            graphics.blit(RenderPipelines.GUI_TEXTURED,lambda,(width/2)-64,(height/2)-64,0,0,128,128,128,128);
         } else {
-            context.blit(RenderPipelines.GUI_TEXTURED,blank,0,0,0,0,width,height,16,16);
-            context.blit(RenderPipelines.GUI_TEXTURED,mrvalve,(width/2)-125,(height/2)-(187/2),0,0,250,187,250,187);
+            graphics.blit(RenderPipelines.GUI_TEXTURED,blank,0,0,0,0,width,height,16,16);
+            graphics.blit(RenderPipelines.GUI_TEXTURED,mrvalve,(width/2)-125,(height/2)-(187/2),0,0,250,187,250,187);
         }
         if (f >= 1.0F) {
             this.minecraft.setOverlay(null);
