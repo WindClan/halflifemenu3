@@ -1,5 +1,5 @@
 plugins {
-    id 'net.fabricmc.fabric-loom' version '1.15-SNAPSHOT'
+    id 'net.fabricmc.fabric-loom' version '1.16-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -21,21 +21,23 @@ dependencies {
     implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 }
 
+def mcversion = project.minecraft_version
+mcversion = mcversion.replace("-snapshot-","-alpha.");
 processResources {
     inputs.property "version", project.version
     inputs.property "minecraft_version", project.minecraft_version
-    inputs.property "minecraft_ver", project.minecraft_ver
+    inputs.property "minecraft_ver", mcversion
     inputs.property "loader_version", project.loader_version
     filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
-                "minecraft_ver": project.minecraft_ver,
+                "minecraft_ver": mcversion,
                 "loader_version": project.loader_version
     }
     filesMatching("quilt.mod.json") {
         expand "version": project.version,
-                "minecraft_ver": project.minecraft_ver
+                "minecraft_ver": mcversion
     }
     filesMatching("META-INF/neoforge.mods.toml") {
         expand "version": project.version,
