@@ -16,7 +16,7 @@ logoFile = "assets/halflifemenu/icon.png"
 [[dependencies.halflifemenu]]
 modId = "minecraft"
 type = "required"
-versionRange = "[${minecraft_version},"
+versionRange = "[${minecraft_version},)"
 ordering = "NONE"
 side = "CLIENT"
 
