@@ -58,7 +58,7 @@ public abstract class LoadingOverlayMixin {
             graphics.blit(RenderPipelines.GUI_TEXTURED,mrvalve,(width/2)-125,(height/2)-(187/2),0,0,250,187,250,187);
         }
         if (f >= 1.0F) {
-            this.minecraft.setOverlay(null);
+            this.minecraft.gui.setOverlay(null);
         }
     }
 }

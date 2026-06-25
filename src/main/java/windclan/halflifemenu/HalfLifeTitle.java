@@ -22,7 +22,7 @@ public class HalfLifeTitle extends Screen {
     private final Identifier logo;
     public HalfLifeTitle() {
         super(Component.literal("Title screen"));
-        if(logoRandom.nextInt(100) == 0) {
+        if(logoRandom.nextInt(100) == 50) {
             logo = Identifier.fromNamespaceAndPath("halflifemenu","textures/minceraft.png");
         } else {
             logo = Identifier.fromNamespaceAndPath("halflifemenu","textures/minecraft.png");
@@ -41,18 +41,18 @@ public class HalfLifeTitle extends Screen {
             multiplaterOffset = 0;
         }
 
-        this.addRenderableWidget(Button.builder(Component.literal("New Game").withStyle(ChatFormatting.WHITE), button -> CreateWorldScreen.openFresh(minecraft,() -> {this.minecraft.setScreen(this);}))
+        this.addRenderableWidget(Button.builder(Component.literal("New Game").withStyle(ChatFormatting.WHITE), button -> CreateWorldScreen.openFresh(minecraft,() -> {this.minecraft.setScreenAndShow(this);}))
                 .bounds(13,  baseHeight - (buttonHeight+2)*(7+multiplaterOffset), buttonWidth, buttonHeight)
                 .build());
-        this.addRenderableWidget(Button.builder(Component.literal("Load Game").withStyle(ChatFormatting.WHITE), button -> this.minecraft.setScreen(new SelectWorldScreen(this)))
+        this.addRenderableWidget(Button.builder(Component.literal("Load Game").withStyle(ChatFormatting.WHITE), button -> this.minecraft.setScreenAndShow(new SelectWorldScreen(this)))
                 .bounds(13,  baseHeight - (buttonHeight+2)*(6+multiplaterOffset), buttonWidth, buttonHeight)
                 .build());
         if (multiplayerAllowed) {
-            this.addRenderableWidget(Button.builder(Component.literal("Find Servers").withStyle(ChatFormatting.WHITE), button -> this.minecraft.setScreen(new JoinMultiplayerScreen(this)))
+            this.addRenderableWidget(Button.builder(Component.literal("Find Servers").withStyle(ChatFormatting.WHITE), button -> this.minecraft.setScreenAndShow(new JoinMultiplayerScreen(this)))
                     .bounds(13,  baseHeight - (buttonHeight+2)*6, buttonWidth, buttonHeight)
                     .build());
         }
-        this.addRenderableWidget(Button.builder(Component.literal("Options...").withStyle(ChatFormatting.WHITE), button -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options,false)))
+        this.addRenderableWidget(Button.builder(Component.literal("Options...").withStyle(ChatFormatting.WHITE), button -> this.minecraft.setScreenAndShow(new OptionsScreen(this, this.minecraft.options,false)))
                 .bounds(13,  baseHeight - (buttonHeight+2)*4, buttonWidth, buttonHeight)
                 .build());
         this.addRenderableWidget(Button.builder(Component.literal("Quit Game").withStyle(ChatFormatting.WHITE), button -> this.minecraft.stop())

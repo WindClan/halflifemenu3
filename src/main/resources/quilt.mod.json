@@ -19,7 +19,7 @@
     "depends": [
       {
         "id": "minecraft",
-        "version": "${minecraft_ver}"
+        "version": "~${minecraft_ver}"
       }
     ]
   },

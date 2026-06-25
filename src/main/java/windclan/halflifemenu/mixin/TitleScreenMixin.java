@@ -21,7 +21,7 @@ public class TitleScreenMixin {
     @Inject(at = @At("HEAD"), method = "init",cancellable = true)
     public void init(CallbackInfo ci) {
         if(!this.client.isDemo()) {
-            this.client.setScreen(new HalfLifeTitle());
+            this.client.setScreenAndShow(new HalfLifeTitle());
             ci.cancel();
         }
         else {
