@@ -1,12 +1,10 @@
 package windclan.halflifemenu.mixin;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.LoadingOverlay;
-import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.resources.Identifier;
-import net.minecraft.util.Util;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.Util;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,39 +24,40 @@ public abstract class LoadingOverlayMixin {
     private long fadeOutStart;
     @Final @Shadow
     private boolean fadeIn;
-    @Unique
-    private final static Identifier blank = Identifier.fromNamespaceAndPath("halflifemenu","textures/loading/blank.png");
-    @Unique
-    private final static Identifier gray = Identifier.fromNamespaceAndPath("halflifemenu","textures/loading/gray.png");
-    @Unique
-    private final static Identifier mrvalve = Identifier.fromNamespaceAndPath("halflifemenu","textures/loading/mrvalve.png");
-    @Unique
-    private final static Identifier openyoureyes = Identifier.fromNamespaceAndPath("halflifemenu","textures/loading/openyoureyes.png");
-    @Unique
-    private final static Identifier lambda = Identifier.fromNamespaceAndPath("halflifemenu","textures/loading/lambda.png");
     @Inject(method="registerTextures", at=@At("TAIL"))
-    private static void registerTextures(final TextureManager textureManager, CallbackInfo ci) {
-        textureManager.registerAndLoad(blank,new MenuTexture(blank));
-        textureManager.registerAndLoad(gray,new MenuTexture(gray));
-        textureManager.registerAndLoad(mrvalve,new MenuTexture(mrvalve));
-        textureManager.registerAndLoad(openyoureyes,new MenuTexture(openyoureyes));
-        textureManager.registerAndLoad(lambda,new MenuTexture(lambda));
+    private static void registerTextures(Minecraft minecraft, CallbackInfo ci) {
+        MenuTexture.registerTexture(ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/loading/gray.png"));
+        MenuTexture.registerTexture(ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/loading/lambda.png"));
+        MenuTexture.registerTexture(ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/loading/blank.png"));
+        MenuTexture.registerTexture(ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/loading/mrvalve.png"));
+        MenuTexture.registerTexture(ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/bkg.png"));
+        MenuTexture.registerTexture(ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/minecraft.png"));
+        MenuTexture.registerTexture(ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/minceraft.png"));
     }
 
-    @Inject(method="extractRenderState", at=@At("TAIL"))
-    public void extractRenderState(final GuiGraphicsExtractor graphics, final int mouseX, final int mouseY, final float a, CallbackInfo ci) {
+    @Unique
+    private static ResourceLocation gray = ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/loading/gray.png");
+    @Unique
+    private static ResourceLocation lambda = ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/loading/lambda.png");
+    @Unique
+    private static ResourceLocation blank = ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/loading/blank.png");
+    @Unique
+    private static ResourceLocation mrvalve = ResourceLocation.fromNamespaceAndPath("halflifemenu","textures/loading/mrvalve.png");
+
+    @Inject(method="render", at=@At("TAIL"))
+    public void render(GuiGraphics context, int i, int j, float f1, CallbackInfo ci) {
         int width = minecraft.getWindow().getGuiScaledWidth();
         int height = minecraft.getWindow().getGuiScaledHeight();
         float f = this.fadeOutStart > -1L ? (float)(Util.getEpochMillis() - this.fadeOutStart) / 1000.0F : -1.0F;
         if(this.fadeIn) {
-            graphics.blit(RenderPipelines.GUI_TEXTURED,gray,0,0,0,0,width,height,16,16);
-            graphics.blit(RenderPipelines.GUI_TEXTURED,lambda,(width/2)-64,(height/2)-64,0,0,128,128,128,128);
+            context.blit(gray,0,0,0,0,width,height,16,16);
+            context.blit(lambda,(width/2)-64,(height/2)-64,0,0,128,128,128,128);
         } else {
-            graphics.blit(RenderPipelines.GUI_TEXTURED,blank,0,0,0,0,width,height,16,16);
-            graphics.blit(RenderPipelines.GUI_TEXTURED,mrvalve,(width/2)-125,(height/2)-(187/2),0,0,250,187,250,187);
+            context.blit(blank,0,0,0,0,width,height,16,16);
+            context.blit(mrvalve,(width/2)-125,(height/2)-(187/2),0,0,250,187,250,187);
         }
         if (f >= 1.0F) {
-            this.minecraft.gui.setOverlay(null);
+            this.minecraft.setOverlay(null);
         }
     }
 }
